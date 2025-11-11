@@ -1,4 +1,11 @@
-import { BadgesResponse, LeaguesResponse } from './types'
+import {
+  BadgesResponse,
+  LeaguesResponse,
+  LeagueSchema,
+  SeasonBadgeSchema,
+} from './types'
+
+export type { BadgesResponse, LeaguesResponse, LeagueSchema, SeasonBadgeSchema }
 
 type Endpoint = 'leagues' | 'badges'
 
