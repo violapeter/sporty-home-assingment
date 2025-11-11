@@ -7,12 +7,16 @@ export interface LeaguesViewModel {
   leagues: League[]
   loading: boolean
   currentBadge: SeasonBadge | null
+  sportTypeFilter: SportType | ''
+  searchQuery: string
 }
 
 const DEFAULT_VIEW_MODEL: LeaguesViewModel = {
   leagues: [],
   loading: true,
   currentBadge: null,
+  sportTypeFilter: '',
+  searchQuery: '',
 }
 
 export class LeaguesPresenter extends AbstractPresenter<
@@ -39,7 +43,7 @@ export class LeaguesPresenter extends AbstractPresenter<
     leagues: League[],
     sportType: SportType | null,
   ): League[] {
-    if (!sportType) {
+    if (sportType === null) {
       return leagues
     }
 
@@ -57,15 +61,19 @@ export class LeaguesPresenter extends AbstractPresenter<
     )
   }
 
-  reduceViewModel(domainModel: LeaguesDomainModel): LeaguesViewModel {
+  reduceViewModel({
+    leagues,
+    sportTypeFilter,
+    loading,
+    currentSeasonBadge,
+    searchQuery,
+  }: LeaguesDomainModel): LeaguesViewModel {
     return {
-      leagues: this.filterLeaguesByAll(
-        domainModel.leagues,
-        domainModel.sportTypeFilter,
-        domainModel.searchQuery,
-      ),
-      loading: domainModel.loading,
-      currentBadge: domainModel.currentSeasonBadge,
+      leagues: this.filterLeaguesByAll(leagues, sportTypeFilter, searchQuery),
+      loading: loading,
+      currentBadge: currentSeasonBadge,
+      sportTypeFilter: sportTypeFilter === null ? '' : sportTypeFilter,
+      searchQuery: searchQuery,
     }
   }
 
@@ -81,8 +89,8 @@ export class LeaguesPresenter extends AbstractPresenter<
     this.repository.setSearchQuery(searchQuery)
   }
 
-  public setSportTypeFilter(sportType: SportType | null): void {
-    this.repository.setSportTypeFilter(sportType)
+  public setSportTypeFilter(sportType: SportType | ''): void {
+    this.repository.setSportTypeFilter(sportType === '' ? null : sportType)
   }
 
   init() {
