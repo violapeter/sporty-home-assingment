@@ -1,5 +1,7 @@
+import { LeagueList } from './components/LeagueList.tsx'
+
 export const App = () => (
   <>
-    <h1>Hello World!</h1>
+    <LeagueList />
   </>
 )
