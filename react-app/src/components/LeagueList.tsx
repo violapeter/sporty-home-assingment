@@ -35,9 +35,7 @@ export const LeagueList = () => {
               className="LeagueList__SportTypeFilter"
               value={viewModel.sportTypeFilter}
               onChange={(e) => {
-                presenter.setSportTypeFilter(
-                  e.target.value === '' ? null : (e.target.value as any),
-                )
+                presenter.setSportTypeFilter(e.target.value as SportType)
               }}
             >
               <option value={''}>All</option>
