@@ -1,0 +1,6 @@
+{
+  "name": "sports-leagues",
+  "description": "Frontend Home Assignment for Sporty Group",
+  "scripts": {},
+  "workspaces": ["features", "modules/*"]
+}
