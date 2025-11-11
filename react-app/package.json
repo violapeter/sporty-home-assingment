@@ -7,7 +7,12 @@
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "features": "file:../features",
+    "shared-types": "file:../modules/shared-types",
+    "abstract-mvvp": "file:../modules/abstract-mvvp",
+    "observable": "file:../modules/observable",
+    "api-client": "file:../modules/api-client"
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
