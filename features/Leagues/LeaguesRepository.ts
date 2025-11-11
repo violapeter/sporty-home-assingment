@@ -10,6 +10,7 @@ export interface LeaguesDomainModel {
   seasonBadges: Record<string, SeasonBadge>
   currentSeasonBadge: SeasonBadge | null
   loading: boolean
+  seasonBadgeLoading: boolean
 }
 
 class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
@@ -20,6 +21,7 @@ class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
     seasonBadges: {},
     currentSeasonBadge: null,
     loading: true,
+    seasonBadgeLoading: false,
   }
 
   gateway = leagueDataGateway
@@ -55,7 +57,7 @@ class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
   }
 
   private async getSeasonBadge(leagueId: string): Promise<SeasonBadge> {
-    this.setFieldValue('loading', true)
+    this.setFieldValue('seasonBadgeLoading', true)
 
     if (this.value.seasonBadges[leagueId]) {
       return this.value.seasonBadges[leagueId]
@@ -64,7 +66,7 @@ class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
     const response = await this.gateway.getSeasonBadges(leagueId)
     const seasonBadge = this.mapSeasonBadgeApiResponse(response.seasons[0])
 
-    this.setFieldValue('loading', false)
+    this.setFieldValue('seasonBadgeLoading', false)
 
     return seasonBadge
   }

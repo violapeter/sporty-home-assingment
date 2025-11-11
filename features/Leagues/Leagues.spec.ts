@@ -87,7 +87,7 @@ describe('Leagues feature', () => {
   })
 
   it('should load the first season badge if a league clicked', async () => {
-    await presenter.handleLeagueClick('4328')
+    await presenter.openSeasonBadgeDisplay('4328')
     expect(viewModel.currentBadge).toEqual({
       season: '2014-2015',
       badge:
@@ -96,10 +96,10 @@ describe('Leagues feature', () => {
   })
 
   it('should indicate the loading state during the request', async () => {
-    presenter.handleLeagueClick('4328').then(() => {
-      expect(viewModel.loading).toBe(false)
+    presenter.openSeasonBadgeDisplay('4328').then(() => {
+      expect(viewModel.seasonBadgeLoading).toBe(false)
     })
-    expect(viewModel.loading).toBe(true)
+    expect(viewModel.seasonBadgeLoading).toBe(true)
   })
 
   it('should filter by search query when it is set ', () => {

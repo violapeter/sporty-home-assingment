@@ -7,6 +7,8 @@ export interface LeaguesViewModel {
   leagues: League[]
   loading: boolean
   currentBadge: SeasonBadge | null
+  isBadgeDisplayOpen: boolean
+  seasonBadgeLoading: boolean
   sportTypeFilter: SportType | ''
   searchQuery: string
 }
@@ -14,6 +16,8 @@ export interface LeaguesViewModel {
 const DEFAULT_VIEW_MODEL: LeaguesViewModel = {
   leagues: [],
   loading: true,
+  isBadgeDisplayOpen: false,
+  seasonBadgeLoading: false,
   currentBadge: null,
   sportTypeFilter: '',
   searchQuery: '',
@@ -66,6 +70,7 @@ export class LeaguesPresenter extends AbstractPresenter<
     sportTypeFilter,
     loading,
     currentSeasonBadge,
+    seasonBadgeLoading,
     searchQuery,
   }: LeaguesDomainModel): LeaguesViewModel {
     return {
@@ -74,6 +79,8 @@ export class LeaguesPresenter extends AbstractPresenter<
       currentBadge: currentSeasonBadge,
       sportTypeFilter: sportTypeFilter === null ? '' : sportTypeFilter,
       searchQuery: searchQuery,
+      seasonBadgeLoading: seasonBadgeLoading,
+      isBadgeDisplayOpen: currentSeasonBadge !== null,
     }
   }
 
@@ -81,7 +88,7 @@ export class LeaguesPresenter extends AbstractPresenter<
     await this.repository.getLeagues()
   }
 
-  public async handleLeagueClick(leagueId: string): Promise<void> {
+  public async openSeasonBadgeDisplay(leagueId: string): Promise<void> {
     await this.repository.setCurrentSeasonBadge(leagueId)
   }
 
@@ -91,6 +98,10 @@ export class LeaguesPresenter extends AbstractPresenter<
 
   public setSportTypeFilter(sportType: SportType | ''): void {
     this.repository.setSportTypeFilter(sportType === '' ? null : sportType)
+  }
+
+  public closeSeasonBadgeDisplay() {
+    this.repository.setFieldValue('currentSeasonBadge', null)
   }
 
   init() {
