@@ -1,6 +1,12 @@
 {
   "name": "sports-leagues",
   "description": "Frontend Home Assignment for Sporty Group",
-  "scripts": {},
-  "workspaces": ["features", "modules/*"]
+  "scripts": {
+    "dev": "npm run dev -w react-app"
+  },
+  "workspaces": [
+    "features",
+    "react-app",
+    "modules/*"
+  ]
 }
