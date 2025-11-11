@@ -1,4 +1,4 @@
-import { Observable } from '../../observable/Observable'
+import { Observable } from 'observable'
 
 type Setter<T> = T | ((prevState: T) => T)
 
