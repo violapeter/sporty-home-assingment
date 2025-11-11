@@ -2,11 +2,13 @@
   "name": "sports-leagues",
   "description": "Frontend Home Assignment for Sporty Group",
   "scripts": {
-    "dev": "npm run dev -w react-app"
+    "dev:react": "npm run dev -w react-app",
+    "dev:vue": "npm run dev -w vue-app"
   },
   "workspaces": [
     "features",
     "react-app",
+    "vue-app",
     "modules/*"
   ]
 }
