@@ -60,7 +60,7 @@ export const LeagueList = () => {
                 <League
                   key={league.id}
                   alternateNames={league.alternateName.split(',')}
-                  onClick={() => presenter.handleLeagueClick(league.id)}
+                  onClick={() => presenter.openSeasonBadgeDisplay(league.id)}
                   {...league}
                 />
               ))}
@@ -69,7 +69,12 @@ export const LeagueList = () => {
         </>
       )}
 
-      {viewModel.currentBadge && <SeasonBadge />}
+      <SeasonBadge
+        open={viewModel.isBadgeDisplayOpen}
+        loading={viewModel.seasonBadgeLoading}
+        seasonBadge={viewModel.currentBadge}
+        onClose={() => presenter.closeSeasonBadgeDisplay()}
+      />
     </div>
   )
 }
