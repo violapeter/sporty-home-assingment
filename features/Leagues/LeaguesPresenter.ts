@@ -1,6 +1,7 @@
 import type { League, SeasonBadge, SportType } from 'shared-types'
 import { AbstractPresenter } from 'abstract-mvvp'
-import { LeaguesDomainModel, leaguesRepository } from './LeaguesRepository'
+import type { LeaguesDomainModel } from './LeaguesRepository'
+import { leaguesRepository } from './LeaguesRepository'
 
 export interface LeaguesViewModel {
   leagues: League[]

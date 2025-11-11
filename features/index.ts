@@ -1,1 +1,2 @@
-export { LeaguesPresenter, LeaguesViewModel } from './Leagues/LeaguesPresenter'
+export { LeaguesPresenter } from './Leagues/LeaguesPresenter'
+export type { LeaguesViewModel } from './Leagues/LeaguesPresenter'
