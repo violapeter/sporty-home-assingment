@@ -1,5 +1,5 @@
 import { LeaguesApiClient } from 'api-client'
-import type { BadgesResponse, LeaguesResponse } from 'api-client'
+import type { SeasonsResponse, LeaguesResponse } from 'api-client'
 
 export class LeagueDataGateway {
   constructor(private apiClient: LeaguesApiClient) {}
@@ -8,8 +8,8 @@ export class LeagueDataGateway {
     return this.apiClient.leagues.list()
   }
 
-  async getSeasonBadges(id: string): Promise<BadgesResponse> {
-    return this.apiClient.badges.list({ id })
+  async getSeasonBadges(id: string): Promise<SeasonsResponse> {
+    return this.apiClient.seasons.list({ id, badge: '1' })
   }
 }
 

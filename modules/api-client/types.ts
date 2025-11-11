@@ -14,6 +14,6 @@ export type LeaguesResponse = {
   leagues: LeagueSchema[]
 }
 
-export type BadgesResponse = {
+export type SeasonsResponse = {
   seasons: SeasonBadgeSchema[]
 }

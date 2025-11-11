@@ -1,20 +1,25 @@
 import type {
-  BadgesResponse,
+  SeasonsResponse,
   LeaguesResponse,
   LeagueSchema,
   SeasonBadgeSchema,
 } from './types'
 
-export type { BadgesResponse, LeaguesResponse, LeagueSchema, SeasonBadgeSchema }
+export type {
+  SeasonsResponse,
+  LeaguesResponse,
+  LeagueSchema,
+  SeasonBadgeSchema,
+}
 
-type Endpoint = 'leagues' | 'badges'
+type Endpoint = 'leagues' | 'seasons'
 
 export class LeaguesApiClient {
   private static API_ROOT = 'https://www.thesportsdb.com/api/v1/'
 
   private static ENDPOINTS: Record<Endpoint, string> = {
     leagues: 'json/3/all_leagues.php',
-    badges: 'json/3/search_all_seasons.php',
+    seasons: 'json/3/search_all_seasons.php',
   }
 
   constructor(private apiRoot = LeaguesApiClient.API_ROOT) {}
@@ -49,10 +54,10 @@ export class LeaguesApiClient {
     }
   }
 
-  public get badges() {
+  public get seasons() {
     return {
-      list: async (filters: Record<string, any>): Promise<BadgesResponse> => {
-        return this.get<BadgesResponse>('badges', filters)
+      list: async (filters: Record<string, any>): Promise<SeasonsResponse> => {
+        return this.get<SeasonsResponse>('seasons', filters)
       },
     }
   }
