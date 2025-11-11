@@ -1,4 +1,4 @@
-import { AbstractRepository } from '../AbstractRepository'
+import { AbstractRepository } from './AbstractRepository'
 
 globalThis.structuredClone =
   globalThis.structuredClone || ((obj) => JSON.parse(JSON.stringify(obj)))

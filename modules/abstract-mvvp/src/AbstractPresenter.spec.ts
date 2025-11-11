@@ -1,5 +1,5 @@
-import { AbstractPresenter } from '../AbstractPresenter'
-import { AbstractRepository } from '../AbstractRepository'
+import { AbstractPresenter } from './AbstractPresenter'
+import { AbstractRepository } from './AbstractRepository'
 
 class TestPresenter extends AbstractPresenter<DomainModel, ViewModel> {
   defaultViewModel = {} as ViewModel

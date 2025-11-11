@@ -5,6 +5,7 @@
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
     "types": ["jest", "node"],
-    "lib": ["es2021"]
+    "lib": ["es2021"],
+    "isolatedModules": true
   }
 }

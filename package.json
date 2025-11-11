@@ -3,7 +3,8 @@
   "description": "Frontend Home Assignment for Sporty Group",
   "scripts": {
     "dev:react": "npm run dev -w react-app",
-    "dev:vue": "npm run dev -w vue-app"
+    "dev:vue": "npm run dev -w vue-app",
+    "test": "npm run test --workspaces --if-present"
   },
   "workspaces": [
     "features",
