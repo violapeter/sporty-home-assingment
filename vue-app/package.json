@@ -1,33 +1,27 @@
 {
   "name": "vue-app",
-  "version": "0.0.0",
-  "private": true,
   "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "vue": "^3.5.22",
-    "features": "file:../features",
-    "shared-types": "file:../modules/shared-types",
     "abstract-mvvp": "file:../modules/abstract-mvvp",
+    "api-client": "file:../modules/api-client",
+    "features": "file:../features",
     "observable": "file:../modules/observable",
-    "api-client": "file:../modules/api-client"
+    "shared-types": "file:../modules/shared-types",
+    "vue": "^3.5.22"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
-    "@types/node": "^22.18.11",
+    "@types/node": "^24.10.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",
     "typescript": "~5.9.0",
-    "vite": "npm:rolldown-vite@latest",
+    "vite": "npm:rolldown-vite@7.2.4",
     "vue-tsc": "^3.1.1"
   },
   "prettier": "prettier-config"
