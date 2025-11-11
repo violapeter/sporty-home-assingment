@@ -1,0 +1,16 @@
+{
+  "name": "observable",
+  "main": "Observable.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.4.4"
+  },
+  "prettier": "prettier-config",
+  "jest": {
+    "preset": "ts-jest"
+  }
+}
