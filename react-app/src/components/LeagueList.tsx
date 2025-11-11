@@ -1,24 +1,75 @@
 import { usePresenter } from '../hooks/usePresenter'
 import { LeaguesPresenter } from 'features'
 import { League } from './League.tsx'
+import type { SportType } from 'shared-types'
+import { SeasonBadge } from './SeasonBadge.tsx'
 
 export const LeagueList = () => {
-  const [viewModel] = usePresenter(LeaguesPresenter)
+  const [viewModel, presenter] = usePresenter(LeaguesPresenter)
+
+  const sportTypeFilterOptions: SportType[] = [
+    'American Football',
+    'Basketball',
+    'Soccer',
+    'Ice Hockey',
+    'Motorsport',
+  ]
 
   return (
     <div className="LeagueList">
-      <h2 className="LeagueList__Title">Leagues:</h2>
-      {viewModel.loading && <div>Loading...</div>}
-      {viewModel.leagues.map((league) => (
-        <League
-          key={league.id}
-          alternateNames={league.alternateName.split(',')}
-          {...league}
-        />
-      ))}
-      {viewModel.currentBadge && (
-        <div>Current badge: {viewModel.currentBadge.season}</div>
+      <h2 className="LeagueList__Title">Leagues</h2>
+      {viewModel.loading ? (
+        <div className="LeagueList__Loading">Loading...</div>
+      ) : (
+        <>
+          <div className="LeagueList__Filters">
+            <input
+              type="text"
+              placeholder="Search leagues"
+              value={viewModel.searchQuery}
+              className="LeagueList__Search"
+              onChange={(e) => presenter.setSearchQuery(e.target.value)}
+            />
+            <select
+              className="LeagueList__SportTypeFilter"
+              value={viewModel.sportTypeFilter}
+              onChange={(e) => {
+                presenter.setSportTypeFilter(
+                  e.target.value === '' ? null : (e.target.value as any),
+                )
+              }}
+            >
+              <option value={''}>All</option>
+              <optgroup label="Sport Type">
+                {sportTypeFilterOptions.map((sportTypeFilterOption) => (
+                  <option
+                    key={sportTypeFilterOption}
+                    value={sportTypeFilterOption}
+                  >
+                    {sportTypeFilterOption}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </div>
+          {viewModel.leagues.length === 0 ? (
+            <div className="LeagueList__NoResults">🤷 No leagues found</div>
+          ) : (
+            <div className="LeagueList__Leagues">
+              {viewModel.leagues.map((league) => (
+                <League
+                  key={league.id}
+                  alternateNames={league.alternateName.split(',')}
+                  onClick={() => presenter.handleLeagueClick(league.id)}
+                  {...league}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
+
+      {viewModel.currentBadge && <SeasonBadge />}
     </div>
   )
 }
