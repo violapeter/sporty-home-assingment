@@ -18,8 +18,9 @@ export const LeagueList = () => {
   return (
     <div className="LeagueList">
       <h2 className="LeagueList__Title">Leagues</h2>
+
       {viewModel.loading ? (
-        <div className="LeagueList__Loading">Loading...</div>
+        <div className="LeagueList__Loading Loading">Loading...</div>
       ) : (
         <>
           <div className="LeagueList__Filters">

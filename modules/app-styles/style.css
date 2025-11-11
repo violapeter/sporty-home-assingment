@@ -25,6 +25,7 @@ body {
 
 .LeagueList__Loading {
   display: flex;
+  padding: 0 0 0 32px;
 }
 
 .LeagueList__Filters {
@@ -144,4 +145,132 @@ body {
   line-height: 15px;
   letter-spacing: -0.25px;
   font-style: italic;
+}
+
+/* == Season Badge display */
+
+dialog, ::backdrop {
+  /** JetBrains IDE doesn't understand allow-discrete */
+
+  /* noinspection CssInvalidPropertyValue */
+  transition:
+    display .3s allow-discrete,
+    overlay .3s allow-discrete,
+    filter .3s allow-discrete,
+    transform .3s allow-discrete,
+    opacity .7s;
+}
+
+.SeasonBadgeDisplay {
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  border-radius: 16px;
+  padding: 16px;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-30px) scale(1.05);
+
+  &[open] {
+    display: flex;
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+
+    &::backdrop {
+      opacity: 1;
+    }
+
+    @starting-style {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(-30px) scale(1.05);
+    }
+  }
+
+  &::backdrop {
+    background: rgb(31 31 31 / 95%);
+    opacity: 0;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+.SeasonBadgeDisplay__CloseButton {
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  font-size: 32px;
+  line-height: 30px;
+  border: 0;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background: #f3f4fd;
+  }
+}
+
+.SeasonBadgeDisplay__Loading {
+  display: flex;
+}
+
+.SeasonBadgeDisplay__Content {
+  width: 360px;
+  height: 360px;
+}
+
+.SeasonBadgeDisplay__Image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/* == Loading animation */
+
+@keyframes loading-animation {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.Loading {
+  display: flex;
+  align-items: center;
+  color: #47978d;
+  position: relative;
+  padding: 0 0 0 32px;
+
+  &::before,
+  &::after {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+  }
+
+  &::after {
+    background: #8520c8;
+    animation: loading-animation 0.5s infinite ease-out;
+  }
+
+  &::before {
+    background: #628cdf;
+    animation: .3s loading-animation 1.3s infinite ease-out;
+  }
 }

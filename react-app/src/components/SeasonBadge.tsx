@@ -1,3 +1,4 @@
+import React from 'react'
 import type { SeasonBadge as SeasonBadgeType } from 'shared-types'
 
 interface SeasonBadgeProps {
@@ -12,17 +13,40 @@ export const SeasonBadge = ({
   open,
   loading,
   onClose,
-}: SeasonBadgeProps) => (
-  <dialog open={open}>
-    <button onClick={onClose}>x</button>
-    {loading ? (
-      <div>Loading...</div>
-    ) : (
-      <div>
-        {seasonBadge && seasonBadge.badge && (
-          <img src={seasonBadge.badge} alt={seasonBadge.season} />
+}: SeasonBadgeProps) => {
+  const ref = React.useRef<HTMLDialogElement>(null)
+
+  React.useEffect(() => {
+    if (open && ref.current) {
+      ref.current.showModal()
+    }
+  }, [open])
+
+  const handleClose = () => {
+    onClose()
+    if (ref.current) {
+      ref.current.close()
+    }
+  }
+
+  return (
+    <dialog className="SeasonBadgeDisplay" ref={ref}>
+      <button className="SeasonBadgeDisplay__CloseButton" onClick={handleClose}>
+        ×
+      </button>
+      <div className="SeasonBadgeDisplay__Content">
+        {loading ? (
+          <div className="SeasonBadgeDisplay__Loading Loading">Loading...</div>
+        ) : (
+          seasonBadge && (
+            <img
+              className="SeasonBadgeDisplay__Image"
+              src={seasonBadge.badge}
+              alt={seasonBadge.season}
+            />
+          )
         )}
       </div>
-    )}
-  </dialog>
-)
+    </dialog>
+  )
+}
