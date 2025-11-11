@@ -22,9 +22,47 @@ export class LeaguesPresenter extends AbstractPresenter<
 
   repository = leaguesRepository
 
+  private filterLeaguesBySearchQuery(
+    leagues: League[],
+    searchQuery: string,
+  ): League[] {
+    return leagues.filter((league) => {
+      const name = league.name.toLowerCase()
+      const searchQueryLower = searchQuery.toLowerCase()
+
+      return name.includes(searchQueryLower)
+    })
+  }
+
+  private filterLeaguesBySportType(
+    leagues: League[],
+    sportType: SportType | null,
+  ): League[] {
+    if (!sportType) {
+      return leagues
+    }
+
+    return leagues.filter((league) => league.sport === sportType)
+  }
+
+  private filterLeaguesByAll(
+    leagues: League[],
+    sportType: SportType | null,
+    searchQuery: string,
+  ): League[] {
+    return this.filterLeaguesBySportType(
+      this.filterLeaguesBySearchQuery(leagues, searchQuery),
+      sportType,
+    )
+  }
+
   reduceViewModel(domainModel: LeaguesDomainModel): LeaguesViewModel {
     return {
-      leagues: domainModel.leagues || [],
+      leagues: this.filterLeaguesByAll(
+        domainModel.leagues,
+        domainModel.sportTypeFilter,
+        domainModel.searchQuery,
+      ),
       loading: domainModel.loading,
       currentBadge: domainModel.currentSeasonBadge,
     }
@@ -34,15 +72,15 @@ export class LeaguesPresenter extends AbstractPresenter<
     await this.repository.getLeagues()
   }
 
-  async handleLeagueClick(leagueId: string): Promise<void> {
+  public async handleLeagueClick(leagueId: string): Promise<void> {
     await this.repository.setCurrentSeasonBadge(leagueId)
   }
 
-  setSearchQuery(searchQuery: string): void {
+  public setSearchQuery(searchQuery: string): void {
     this.repository.setSearchQuery(searchQuery)
   }
 
-  setSportTypeFilter(sportType: SportType | null): void {
+  public setSportTypeFilter(sportType: SportType | null): void {
     this.repository.setSportTypeFilter(sportType)
   }
 

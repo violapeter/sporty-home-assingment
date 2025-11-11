@@ -96,4 +96,36 @@ describe('Leagues feature', () => {
     })
     expect(viewModel.loading).toBe(true)
   })
+
+  it('should filter by search query when it is set ', () => {
+    presenter.setSearchQuery('formu')
+
+    expect(viewModel.leagues).toStrictEqual([
+      {
+        id: '4370',
+        name: 'Formula 1',
+        sport: 'Motorsport',
+        alternateName: 'F1, Formula One, Formula1, Formula 1, Formula-1',
+      },
+      {
+        id: '4371',
+        name: 'Formula E',
+        sport: 'Motorsport',
+        alternateName: 'Formula-E, FormulaE',
+      },
+    ])
+  })
+
+  it('should filter by sport type when it is set ', () => {
+    presenter.setSportTypeFilter('Soccer')
+
+    expect(viewModel.leagues).toStrictEqual([
+      {
+        id: '4328',
+        name: 'English Premier League',
+        sport: 'Soccer',
+        alternateName: 'Premier League, EPL',
+      },
+    ])
+  })
 })
