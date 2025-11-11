@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+  font-family: Inter, sans-serif;
+  background: #f3f4fd;
+}
+
+/* == LeagueList */
+.LeagueList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+}
+
+.LeagueList__Title {
+  font-size: 22px;
+  color: #3e4553;
+  display: inline-block;
+  background: linear-gradient(to right, #8520c8 0%, #628cdf 50%, #47978d 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.LeagueList__Loading {
+  display: flex;
+}
+
+.LeagueList__Filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.LeagueList__Search {
+  border: 1px solid #9f9e9e;
+  font-size: 16px;
+  font-family: Inter, sans-serif;
+  letter-spacing: -0.412px;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.LeagueList__SportTypeFilter {
+  border: 1px solid #9f9e9e;
+  font-size: 16px;
+  font-family: Inter, sans-serif;
+  letter-spacing: -0.412px;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.LeagueList__NoResults {
+  color: #888;
+  font-size: 16px;
+  font-family: Inter, sans-serif;
+  letter-spacing: -0.412px;
+  border: 1px solid #9f9e9e;
+  background: #eff2f9;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.LeagueList__Leagues {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* == League */
+.League {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 12px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: scale 0.1s ease-in-out;
+  cursor: pointer;
+  box-shadow:
+    0 0 1px rgb(3 7 18 / 0%),
+    0 2px 3px rgb(3 7 18 / 1%),
+    0 4px 6px rgb(3 7 18 / 1%),
+    0 6px 10px rgb(3 7 18 / 2%),
+    0 10px 16px rgb(3 7 18 / 2%);
+
+  &::before {
+    font-size: 48px;
+    opacity: 0.8;
+    line-height: 48px;
+    display: block;
+    height: 48px;
+    overflow: hidden;
+    padding: 8px 0 0;
+  }
+
+  &:hover {
+    scale: 1.03;
+  }
+}
+
+.League--Soccer::before { content: '⚽'; }
+.League--Motorsport::before { content: '🏁'; }
+.League--Basketball::before { content: '🏀'; }
+.League--IceHockey::before { content: '🏒'; }
+.League--AmericanFootball::before { content: '🏈'; }
+
+.League__Name {
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+  color: #3e4553;
+}
+
+.League__Meta {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.League__Category {
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  color: #667085;
+  background: #eff2f9;
+  box-shadow: 0 0 0 1px #628cdf;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.League__AlternateNames {
+  display: flex;
+  gap: 8px;
+}
+
+.League__AlternateName {
+  color: #667085;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-style: italic;
+}
