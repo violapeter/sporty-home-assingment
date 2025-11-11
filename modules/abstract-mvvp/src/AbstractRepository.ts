@@ -51,4 +51,8 @@ export abstract class AbstractRepository<T> {
     }
     return this.internalValue
   }
+
+  reset() {
+    this.setValue(structuredClone(this.defaultValue))
+  }
 }

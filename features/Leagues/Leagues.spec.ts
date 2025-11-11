@@ -58,6 +58,11 @@ describe('Leagues feature', () => {
     })
   })
 
+  afterEach(() => {
+    presenter.reset()
+    jest.clearAllMocks()
+  })
+
   it('should load leagues', async () => {
     expect(viewModel.leagues).toEqual([
       {

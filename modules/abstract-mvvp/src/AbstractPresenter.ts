@@ -24,4 +24,8 @@ export abstract class AbstractPresenter<DomainModel, ViewModel> {
   }
 
   init() {}
+
+  reset() {
+    this.repository.reset()
+  }
 }
