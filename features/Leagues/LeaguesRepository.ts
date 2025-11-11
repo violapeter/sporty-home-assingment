@@ -62,7 +62,7 @@ class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
     }
 
     const response = await this.gateway.getSeasonBadges(leagueId)
-    const seasonBadge = this.mapSeasonBadgeApiResponse(response.badges[0])
+    const seasonBadge = this.mapSeasonBadgeApiResponse(response.seasons[0])
 
     this.setFieldValue('loading', false)
 

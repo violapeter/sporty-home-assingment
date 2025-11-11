@@ -15,5 +15,5 @@ export type LeaguesResponse = {
 }
 
 export type BadgesResponse = {
-  badges: SeasonBadgeSchema[]
+  seasons: SeasonBadgeSchema[]
 }

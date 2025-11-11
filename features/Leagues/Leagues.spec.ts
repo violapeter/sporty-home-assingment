@@ -32,7 +32,7 @@ const mockLeaguesResponse = {
 }
 
 const mockSeasonBadgesResponse = {
-  badges: [
+  seasons: [
     {
       strSeason: '2014-2015',
       strBadge:
