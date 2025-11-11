@@ -44,8 +44,8 @@ export class LeaguesApiClient {
 
   public get badges() {
     return {
-      list: async (): Promise<BadgesResponse> => {
-        return this.get<BadgesResponse>('badges')
+      list: async (filters: Record<string, any>): Promise<BadgesResponse> => {
+        return this.get<BadgesResponse>('badges', filters)
       },
     }
   }
