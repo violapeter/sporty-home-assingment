@@ -4,11 +4,12 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build": "vite build",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
     "abstract-mvvp": "file:../modules/abstract-mvvp",
+    "app-styles": "file:../modules/app-styles",
     "api-client": "file:../modules/api-client",
     "features": "file:../features",
     "observable": "file:../modules/observable",
