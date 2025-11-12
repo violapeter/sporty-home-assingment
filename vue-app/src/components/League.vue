@@ -19,7 +19,7 @@ const classNameMap: { [key in SportType]: string } = {
 </script>
 
 <template>
-  <div :class="['League', classNameMap[sport]]" @click="$emit('click')">
+  <div :class="['League', classNameMap[sport]]">
     <div class="League__Content">
       <h3 class="League__Name">{{ name }}</h3>
       <div class="League__Meta">
