@@ -133,4 +133,128 @@ describe('Leagues feature', () => {
       },
     ])
   })
+
+  describe('Combined filtering', () => {
+    it('should filter by both sport type and search query', () => {
+      presenter.setSportTypeFilter('Motorsport')
+      presenter.setSearchQuery('Formula 1')
+
+      expect(viewModel.leagues).toStrictEqual([
+        {
+          id: '4370',
+          name: 'Formula 1',
+          sport: 'Motorsport',
+          alternateName: 'F1, Formula One, Formula1, Formula 1, Formula-1',
+        },
+      ])
+    })
+
+    it('should return empty array when combined filters match nothing', () => {
+      presenter.setSportTypeFilter('Soccer')
+      presenter.setSearchQuery('Formula')
+
+      expect(viewModel.leagues).toStrictEqual([])
+    })
+
+    it('should reset filters when search query is cleared', () => {
+      presenter.setSearchQuery('Formula')
+      presenter.setSearchQuery('')
+
+      expect(viewModel.leagues).toHaveLength(3)
+    })
+
+    it('should reset filters when sport type is set to empty string', () => {
+      presenter.setSportTypeFilter('Soccer')
+      presenter.setSportTypeFilter('')
+
+      expect(viewModel.leagues).toHaveLength(3)
+    })
+  })
+
+  describe('Case insensitive search', () => {
+    it('should filter case insensitively', () => {
+      presenter.setSearchQuery('FORMULA')
+
+      expect(viewModel.leagues).toHaveLength(2)
+      expect(viewModel.leagues[0].name).toBe('Formula 1')
+      expect(viewModel.leagues[1].name).toBe('Formula E')
+    })
+
+    it('should filter by partial name case insensitively', () => {
+      presenter.setSearchQuery('premier')
+
+      expect(viewModel.leagues).toStrictEqual([
+        {
+          id: '4328',
+          name: 'English Premier League',
+          sport: 'Soccer',
+          alternateName: 'Premier League, EPL',
+        },
+      ])
+    })
+  })
+
+  describe('Season badge caching', () => {
+    it('should cache season badge data after first request', async () => {
+      await presenter.openSeasonBadgeDisplay('4328')
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledTimes(1)
+
+      await presenter.openSeasonBadgeDisplay('4328')
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledTimes(1)
+
+      expect(viewModel.currentBadge).toEqual({
+        season: '2014-2015',
+        badge:
+          'https://r2.thesportsdb.com/images/media/league/badgearchive/571jj21690676218.png',
+      })
+    })
+
+    it('should make separate API calls for different leagues', async () => {
+      await presenter.openSeasonBadgeDisplay('4328')
+      await presenter.openSeasonBadgeDisplay('4370')
+
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledTimes(2)
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledWith('4328')
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledWith('4370')
+    })
+
+    it('should maintain cache after closing badge display', async () => {
+      await presenter.openSeasonBadgeDisplay('4328')
+      presenter.closeSeasonBadgeDisplay()
+      await presenter.openSeasonBadgeDisplay('4328')
+
+      expect(leagueDataGateway.getSeasonBadges).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('Badge display state management', () => {
+    it('should set badge display to open when a badge is loaded', async () => {
+      expect(viewModel.isBadgeDisplayOpen).toBe(false)
+
+      await presenter.openSeasonBadgeDisplay('4328')
+
+      expect(viewModel.isBadgeDisplayOpen).toBe(true)
+      expect(viewModel.currentBadge).toBeTruthy()
+    })
+
+    it('should close badge display when requested', async () => {
+      await presenter.openSeasonBadgeDisplay('4328')
+      expect(viewModel.isBadgeDisplayOpen).toBe(true)
+
+      presenter.closeSeasonBadgeDisplay()
+
+      expect(viewModel.isBadgeDisplayOpen).toBe(false)
+      expect(viewModel.currentBadge).toBeNull()
+    })
+
+    it('should show loading state during badge request', async () => {
+      expect(viewModel.seasonBadgeLoading).toBe(false)
+
+      const promise = presenter.openSeasonBadgeDisplay('4328')
+      expect(viewModel.seasonBadgeLoading).toBe(true)
+
+      await promise
+      expect(viewModel.seasonBadgeLoading).toBe(false)
+    })
+  })
 })
