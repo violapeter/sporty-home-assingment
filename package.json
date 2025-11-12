@@ -1,6 +1,11 @@
 {
   "name": "sports-leagues",
   "description": "Frontend Home Assignment for Sporty Group",
+  "author": {
+    "name": "Peter Viola",
+    "email": "info@violapeter.hu",
+    "url": "https://violapeter.hu"
+  },
   "scripts": {
     "dev:react": "npm run dev -w react-app",
     "dev:vue": "npm run dev -w vue-app",
