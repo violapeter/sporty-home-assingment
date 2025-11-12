@@ -23,7 +23,7 @@ const sportTypeFilterOptions: SportType[] = [
     <div v-if="viewModel.loading" class="LeagueList__Loading Loading">
       Loading...
     </div>
-    <div v-else>
+    <template v-else>
       <div class="LeagueList__Filters">
         <input
           type="text"
@@ -69,7 +69,7 @@ const sportTypeFilterOptions: SportType[] = [
           @click="presenter.openSeasonBadgeDisplay(league.id)"
         />
       </div>
-    </div>
+    </template>
 
     <SeasonBadge
       :open="viewModel.isBadgeDisplayOpen"
