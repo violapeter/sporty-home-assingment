@@ -17,7 +17,7 @@ export const LeagueList = () => {
 
   return (
     <div className="LeagueList">
-      <h2 className="LeagueList__Title">Leagues</h2>
+      <h2 className="LeagueList__Title">Sport Leagues</h2>
 
       {viewModel.loading ? (
         <div className="LeagueList__Loading Loading">Loading...</div>
@@ -25,6 +25,7 @@ export const LeagueList = () => {
         <>
           <div className="LeagueList__Filters">
             <input
+              id="search-input"
               type="text"
               placeholder="Search leagues"
               value={viewModel.searchQuery}
@@ -32,6 +33,7 @@ export const LeagueList = () => {
               onChange={(e) => presenter.setSearchQuery(e.target.value)}
             />
             <select
+              id="sport-type-filter"
               className="LeagueList__SportTypeFilter"
               value={viewModel.sportTypeFilter}
               onChange={(e) => {

@@ -18,7 +18,7 @@ const sportTypeFilterOptions: SportType[] = [
 
 <template>
   <div class="LeagueList">
-    <h2 class="LeagueList__Title">Leagues</h2>
+    <h2 class="LeagueList__Title">Sport Leagues</h2>
 
     <div v-if="viewModel.loading" class="LeagueList__Loading Loading">
       Loading...
@@ -26,6 +26,7 @@ const sportTypeFilterOptions: SportType[] = [
     <template v-else>
       <div class="LeagueList__Filters">
         <input
+          id="search-input"
           type="text"
           placeholder="Search leagues"
           :value="viewModel.searchQuery"
@@ -35,6 +36,7 @@ const sportTypeFilterOptions: SportType[] = [
           "
         />
         <select
+          id="sport-type-filter"
           class="LeagueList__SportTypeFilter"
           :value="viewModel.sportTypeFilter"
           @change="
