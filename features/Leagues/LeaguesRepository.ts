@@ -60,11 +60,17 @@ class LeaguesRepository extends AbstractRepository<LeaguesDomainModel> {
     this.setFieldValue('seasonBadgeLoading', true)
 
     if (this.value.seasonBadges[leagueId]) {
+      this.setFieldValue('seasonBadgeLoading', false)
       return this.value.seasonBadges[leagueId]
     }
 
     const response = await this.gateway.getSeasonBadges(leagueId)
     const seasonBadge = this.mapSeasonBadgeApiResponse(response.seasons[0])
+
+    this.setFieldValue('seasonBadges', {
+      ...this.value.seasonBadges,
+      [leagueId]: seasonBadge,
+    })
 
     this.setFieldValue('seasonBadgeLoading', false)
 
