@@ -123,6 +123,25 @@ body {
   color: var(--gray-12);
 }
 
+/* == Header */
+
+.Header {
+  justify-content: center;
+  display: flex;
+  gap: 24px;
+  background: linear-gradient(rgb(255 255 255 / 75%) 0%, rgb(255 255 255 / 0%) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.Header__Link {
+  color: var(--blue-10);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--blue-12);
+  }
+}
+
 
 /* == LeagueList */
 .LeagueList {
