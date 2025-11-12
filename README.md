@@ -7,7 +7,7 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/)
 [![Jest](https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white)](https://jestjs.io/)
 
-**Frontend Home Assignment for Sporty Group—**A showcase of modern frontend architecture with dual-framework implementation.
+**Frontend Home Assignment for Sporty Group —** A showcase of modern frontend architecture with dual-framework implementation.
 
 ## 🚀 Quick Start
 
